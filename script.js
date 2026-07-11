@@ -30,32 +30,47 @@ function playround(humanchoice,comchoice) {
 
     }
 
-    else if((humanchoice === "rock" %% comchoice === "scissors") || (humanchoice === "scissors" %% comchoice === "paper") || (humanchoice === "paper" %% comchoice === "rock")) {
-
-        return (`You won. ${humanchoice} beat ${comchoice}`)
+    else if((humanchoice === "rock" && comchoice === "scissors") || (humanchoice === "scissors" && comchoice === "paper") || (humanchoice === "paper" && comchoice === "rock")) {
         humanScore = humanScore + 1
+        return (`You won. ${humanchoice} beat ${comchoice}`)
+        
     }
 
     else {
-
-        return (`You lost. ${humanchoice} lost to ${comchoice}`)
         comScore = comScore + 1
+        return (`You lost. ${humanchoice} lost to ${comchoice}`)
+        
 
     }
     }
 
-const humanSelection = getHumanChoice()
-const computerSelection = getComChoice()
 
-let round = 0
+let round = 1
 
 
 while (round < 6) {
 
-    getHumanChoice()
-    getComChoice()
+    const humanSelection = getHumanChoice()
+    const computerSelection = getComChoice()
     playround(humanSelection, computerSelection);
+    console.log(`human choice is ${humanSelection}`)
+    console.log(`computer choice is ${computerSelection}`)
+    console.log(`Round number is ${round}`)
+    round = round + 1
+    
+    
+}
 
+// this is after the game ends
+
+if(comScore > humanScore) {
+    console.log(`You lost.`)
+}
+else if(comScore===humanScore) {
+    console.log(`You tied.`)
+}
+else {
+    console.log(`You won.`)
 }
 
 
