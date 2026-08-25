@@ -1,76 +1,99 @@
 let getComChoice = function() {
     const no = Math.random() * 3
     if(no >= 0 && no < 1) {
-        return 'rock'
+        return "rock"
     }
     else if(no >= 1 && no < 2) {
-        return 'scissors'
+        return "scissors"
     }
     else {
-        return 'paper'
+        return "paper"
     }
 }
 
 
-let getHumanChoice = function() {
-
-        const choice = window.prompt("rock, paper or scissors", " ")
-        return choice
 
 
-}
+
+const rock = document.querySelector("#rock")
+const paper = document.querySelector("#paper")
+const scissors = document.querySelector("#scissors")
+
+let humanChoice = undefined
+let comChoice = undefined
+
+rock.addEventListener("click", () => {
+    
+    humanChoice = "rock"
+    comChoice = getComChoice()
+    playround(humanChoice, comChoice)
+
+})
+
+paper.addEventListener("click", () => {
+    
+    humanChoice = "paper"
+    comChoice = getComChoice()
+    playround(humanChoice, comChoice)
+
+})
+
+scissors.addEventListener("click", () => {
+    
+    humanChoice = "scissors"
+    comChoice = getComChoice()
+    playround(humanChoice, comChoice)
+
+})
+
+
+
 
 let humanScore = 0
 let comScore = 0
 
-function playround(humanchoice,comchoice) {
+const div = document.querySelector("#results")
+const span = document.createElement("span")
 
-    if(humanchoice === comchoice) {
-        return (`You are tied. Both of you selected ${humanchoice}`)
+const score = document.querySelector("#score")
+const numberH = document.createElement("span")
+const numberC = document.createElement("span")
+
+
+function playround(humanChoice,comChoice) {
+
+    if(humanChoice === comChoice) {
+        span.textContent = (`You are tied. Both of you selected ${humanChoice}`)
+        div.appendChild(span)
 
     }
 
-    else if((humanchoice === "rock" && comchoice === "scissors") || (humanchoice === "scissors" && comchoice === "paper") || (humanchoice === "paper" && comchoice === "rock")) {
+    else if((humanChoice === "rock" && comChoice === "scissors") || (humanChoice === "scissors" && comChoice === "paper") || (humanChoice === "paper" && comChoice === "rock")) {
         humanScore = humanScore + 1
-        return (`You won. ${humanchoice} beat ${comchoice}`)
-        
+        span.textContent = (`You won. ${humanChoice} beat ${comChoice}`)
+        div.appendChild(span)
+
     }
 
     else {
         comScore = comScore + 1
-        return (`You lost. ${humanchoice} lost to ${comchoice}`)
-        
+        span.textContent =  (`You lost. ${humanChoice} lost to ${comChoice}`)
+        div.appendChild(span)
 
     }
+
+    numberH.textContent = (`Human Score: ${humanScore}`)
+    numberC.textContent = (`Computer Score: ${comScore}`)
+    score.appendChild(numberC)
+    score.appendChild(numberH)
+
+
     }
 
 
-let round = 1
 
 
-while (round < 6) {
 
-    const humanSelection = getHumanChoice()
-    const computerSelection = getComChoice()
-    playround(humanSelection, computerSelection);
-    console.log(`human choice is ${humanSelection}`)
-    console.log(`computer choice is ${computerSelection}`)
-    console.log(`Round number is ${round}`)
-    round = round + 1
-    
-    
-}
+
 
 // this is after the game ends
-
-if(comScore > humanScore) {
-    console.log(`You lost.`)
-}
-else if(comScore===humanScore) {
-    console.log(`You tied.`)
-}
-else {
-    console.log(`You won.`)
-}
-
-
